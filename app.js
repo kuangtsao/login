@@ -12,6 +12,9 @@ app.set('view engine', 'handlebars')
 // import body-parser
 app.use(express.urlencoded({ extended: true }))
 
+// load accounts
+const accounts = require('./accounts.json')
+
 // routes
 app.get('/', (req, res) => {
   res.render('index')
