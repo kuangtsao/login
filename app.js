@@ -9,10 +9,16 @@ const exphbs = require('express-handlebars')
 app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
+// import body-parser
+app.use(express.urlencoded({ extended: true }))
 
 // routes
 app.get('/', (req, res) => {
   res.render('index')
+})
+
+app.post('/', (req, res) => {
+  console.log(req.body)
 })
 
 app.listen(port, () => {
