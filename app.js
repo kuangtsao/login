@@ -17,7 +17,7 @@ const accountsList = require('./accounts.json')
 
 // routes
 app.get('/', (req, res) => {
-  res.render('index')
+  res.render('index', { findingStatus: true })
 })
 
 app.post('/', (req, res) => {
@@ -27,12 +27,10 @@ app.post('/', (req, res) => {
 
   const user = accountsList.users.find(list => list.email === account && list.password === password)
 
-  if (user.length > 0) {
-    console.log('render landing page.')
-    // res.render('landing', { userName: user.firstName })
+  if (typeof(user) !== 'undefined') {
+    res.render('landing', { userName: user.firstName })
   } else {
-    console.log('render error message in index.')
-    // res.render('index', { findingStatus: false })
+    res.render('index', { findingStatus: false })
   }
 })
 
