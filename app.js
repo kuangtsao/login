@@ -27,7 +27,7 @@ app.post('/', (req, res) => {
 
   const user = accountsList.users.find(list => list.email === account && list.password === password)
 
-  if (typeof(user) !== 'undefined') {
+  if (typeof (user) !== 'undefined') {
     res.render('landing', { userName: user.firstName })
   } else {
     res.render('index', { findingStatus: false })
