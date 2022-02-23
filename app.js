@@ -13,7 +13,7 @@ app.set('view engine', 'handlebars')
 app.use(express.urlencoded({ extended: true }))
 
 // load accounts
-const accounts = require('./accounts.json')
+const accountsList = require('./accounts.json')
 
 // routes
 app.get('/', (req, res) => {
@@ -21,7 +21,19 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  console.log(req.body)
+  // 保留原始的搜尋字串
+  const account = req.body.accountInput
+  const password = req.body.passwordInput
+
+  const user = accountsList.users.find(list => list.email === account && list.password === password)
+
+  if (user.length > 0) {
+    console.log('render landing page.')
+    // res.render('landing', { userName: user.firstName })
+  } else {
+    console.log('render error message in index.')
+    // res.render('index', { findingStatus: false })
+  }
 })
 
 app.listen(port, () => {
